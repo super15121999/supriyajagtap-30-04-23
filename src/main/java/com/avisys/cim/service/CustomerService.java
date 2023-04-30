@@ -49,5 +49,10 @@ public Customer getCustomerById(Long id) {
 	// TODO Auto-generated method stub
 	return null;
 }
+public void deleteCustomer(String mobileNumber) {
+    customerRepository.findByMobileNumbersNumber(mobileNumber).ifPresent(customerRepository::delete);
+}
+
+
 
 }
