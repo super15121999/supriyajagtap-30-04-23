@@ -1,4 +1,4 @@
-package com.avisys.cim;
+package com.avisys.cim.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -54,6 +54,11 @@ public class Customer {
 
 	public void setMobileNumber(String mobileNumber) {
 		this.mobileNumber = mobileNumber;
+	}
+
+	public boolean isPresent() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }
