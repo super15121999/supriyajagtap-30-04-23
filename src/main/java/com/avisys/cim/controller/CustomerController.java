@@ -29,6 +29,15 @@ public class CustomerController {
       @RequestParam(required = false) String mobileNumber) {
     return customerService.getCustomers(firstName, lastName, mobileNumber);
   }
+  @PostMapping
+  public ResponseEntity<?> createCustomer(@RequestBody Customer customer) {
+    try {
+      Customer customer1 = customerService.createCustomer(customer1);
+      return ResponseEntity.status(HttpStatus.CREATED).body(customer1);
+    } catch (CustomerCreationException ex) {
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ex.getMessage());
+    }
+  }
   
 }
   
