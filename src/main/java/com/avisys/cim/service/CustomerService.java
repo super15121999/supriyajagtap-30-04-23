@@ -31,10 +31,10 @@ public class CustomerService {
 	    customer.setMobileNumber(customerDto.getMobileNumber());
 	    return customerRepository.save(customer);
 	  }
-  public Customer addMobileNumber(Long customerId, MobileNumber mobileNumber) {
+  public Customer addMobileNumber(Long customerId, List<String> mobileNumbers) {
       Customer customer = customerRepository.findById(customerId).orElseThrow(() -> new NoSuchElementException("Customer not found"));
-      customer.getMobileNumbers().add(mobileNumber);
-      mobileNumber.setCustomer(customer);
+      customer.getMobileNumbers().add(mobileNumbers);
+      ((MobileNumber) mobileNumbers).setCustomer(customer);
       return customerRepository.save(customer);
   }
 
@@ -45,14 +45,19 @@ public class CustomerService {
     }
 
 
-public Customer getCustomerById(Long id) {
+  	public Customer getCustomerById(Long id) {
 	// TODO Auto-generated method stub
 	return null;
-}
-public void deleteCustomer(String mobileNumber) {
+  	}
+  	public void deleteCustomer(String mobileNumber) {
     customerRepository.findByMobileNumbersNumber(mobileNumber).ifPresent(customerRepository::delete);
-}
+  	}
+  	 public Customer updateCustomer(Customer customer) {
+         return customerRepository.save(customer);
+     }
 
 
+
+  	
 
 }

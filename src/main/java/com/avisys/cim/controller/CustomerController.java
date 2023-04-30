@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -56,7 +57,21 @@ public class CustomerController {
       return ResponseEntity.ok(customer);
   }
 
+//Ability to delete over REST API
+  @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+  public ResponseEntity<Void> deleteCustomerById(@PathVariable Long id) {
+      customerService.getCustomerById(id);
+      return ResponseEntity.noContent().build();
+  }
   
+//Modify the application to be able to save a customer with multiple mobile number over REST API
+  @PostMapping(value = "/{id}/mobile-numbers", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+  public ResponseEntity<Customer> addMobileNumbersToCustomer1(@PathVariable Long id, @RequestBody List<String> mobileNumbers) {
+      Customer customer = customerService.addMobileNumber(id, mobileNumbers);
+      return ResponseEntity.ok(customer);
+  }
+
+
 }
   
 
